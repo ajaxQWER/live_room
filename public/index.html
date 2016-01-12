@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>直播室demo</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>-->
+</head>
+<body>
+<div class="container">
+    <h1>直播室</h1>
+    <div id="content">
+        <!--<div>房间号：<span id="roomId">1</span></div>-->
+        <!--&lt;!&ndash;<div class="content">&ndash;&gt;-->
+        <!--<div>-->
+            <!--<p id="time">2016年1月12日10:17:42</p>-->
+            <!--<p><b id="name">AJAX</b>:<span class="say">2222</span></p>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--<form action="#" onsubmit="add()" id="comment">-->
+            <!--<p>-->
+                <!--<label for="username">用户名：</label><input type="text" placeholder="Your Name" id="username"/>-->
+            <!--</p>-->
+            <!--<p>-->
+                <!--<label for="textarea"><textarea name="" id="textarea" cols="30" rows="10" placeholder="Your comments"></textarea></label>-->
+            <!--</p>-->
+            <!--<button type="submit" class="btn">提&nbsp;&nbsp;交</button>-->
+        <!--</form>-->
+    </div>
+
+</div>
+<script type="text/babel">
+    var Comment = React.createClass({
+        getTime:function(){
+            var time=new Date()
+            return {__html: time};
+        },
+        render: function () {
+            return (
+                <div>
+                    <span dangerouslySetInnerHTML = {this.getTime()} />
+                    <p>
+                        <span className="name">111</span>:<span>aaa</span>
+                    </p>
+                </div>
+            );
+        }
+    });
+     var CommentList = React.createClass({
+        render:function(){
+            var commentNodes = this.props.data.map(function(comment){
+                return(
+                  <Comment author ={comment.name} key={comment.pId}>
+                    {comment.content}
+                  </Comment>
+                );
+            });
+            return(
+                <div>
+                  1
+                </div>
+            );
+        }
+    });
+    var CommentForm = React.createClass({
+        handleSubmit:function(e){
+            e.preventDefault();
+            var author = this.refs.author.value.trim();
+        },
+        render:function(){
+            return(
+                <form onSubmit={this.handleSubmit}>
+                    <input type="text" placeholder="Your Name" id="username" ref="author"/>
+                    <input type="textarea" placeholder="Your Words" id="textarea" ref="text"/>
+                    <input type="submit" value="提交" className="btn"/>
+                </form>
+            );
+        }
+    });
+    var CommentBox = React.createClass({
+        render:function(){
+            return(
+                <div>
+                    <CommentList data = {this.state.data}/>
+                    <CommentForm />
+                </div>
+            );
+        }
+    });
+    ReactDOM.render(
+            <CommentBox />,
+            document.getElementById("content")
+    );
+</script>
+</body>
+
+</html>

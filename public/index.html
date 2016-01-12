@@ -82,6 +82,18 @@
         }
     });
     var CommentBox = React.createClass({
+        getInitialState:function(){
+            return{data:[]};
+        },
+        componentDidMount:function(){
+            $.ajax({
+                url:this.props.url,
+                type:"get",
+                success:function(data){
+
+                }
+            })
+        },
         render:function(){
             return(
                 <div>
@@ -92,7 +104,7 @@
         }
     });
     ReactDOM.render(
-            <CommentBox />,
+            <CommentBox url="/demo"/>,
             document.getElementById("content")
     );
 </script>

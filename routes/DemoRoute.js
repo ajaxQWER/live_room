@@ -11,7 +11,7 @@ router.post("/add",function(req,res){
         res.send("添加成功");
     })
 });
-router.get("/show",function(req,res){
+router.post("/show",function(req,res){
     demoService.showMessage(req.body.id,function(r){
        res.send(r)
    })
